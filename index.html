@@ -10,9 +10,14 @@
     <div class="header">
         <h1>Contemporary x International Roadmap</h1>
     </div>
-    
-    <div class="road-container">
-        <!-- Road background with stops -->
+
+    <!-- Cover Page -->
+    <div id="coverPage">
+        <button id="startButton" onclick="startGame()">Start</button>
+    </div>
+
+    <!-- Roadmap (hidden initially) -->
+    <div id="roadmap" class="road-container" style="display: none;">
         <div class="stop stop-1 unlocked" onclick="openPhase(1)">
             <span class="stop-text">Phase 1</span>
         </div>
@@ -30,9 +35,14 @@
         </div>
     </div>
 
-    <button id="startButton" onclick="startGame()">Start</button>
-    
-    <div id="phaseContainer"></div>
+    <!-- Modal Window for Phase Details -->
+    <div id="phaseModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="phaseTitle"></h2>
+            <div id="taskList"></div>
+            <button id="nextButton" disabled onclick="closeModal()">Next</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
