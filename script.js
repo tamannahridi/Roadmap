@@ -81,4 +81,3 @@ function goHome() {
   document.getElementById("congratsPage").classList.remove("active");
   document.getElementById("homePage").classList.add("active");
 }
-
