@@ -1,103 +1,111 @@
+/* General Styles */
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #005533; /* Harrods green */
+    color: white;
+    overflow-x: hidden;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #d4af37; /* Harrods gold */
+}
+
+.cover-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
 }
 
+.button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gold-button {
+    background-color: #d4af37; /* Harrods gold */
+    color: #005533; /* Harrods green */
+    font-weight: bold;
+}
+
+/* Roadmap Styles */
 .road-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
     position: relative;
-    width: 80%;
-    max-width: 1200px;
-    height: 400px;
-    background-image: url('images/road.png'); /* Replace with your road image URL */
+    background-image: url('road.jpg'); /* Add a road image */
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
-    margin-bottom: 30px;
 }
 
 .stop {
-    position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    text-align: center;
-    line-height: 40px;
-    color: white;
+    font-size: 16px;
     font-weight: bold;
+    text-align: center;
     cursor: pointer;
-    transform: translateY(-50%);
     transition: all 0.3s ease;
 }
 
 .stop.unlocked {
-    background-color: #ff5733; /* Red or any color for unlocked stops */
+    background-color: #d4af37; /* Harrods gold */
+    color: #005533; /* Harrods green */
 }
 
 .stop.locked {
-    background-color: #ccc; /* Grey for locked stops */
-    pointer-events: none;
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
 }
 
 .stop-text {
     position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
-    color: white;
+    bottom: -25px;
+    width: 100px;
+    text-align: center;
 }
 
-.road-container .stop-1 { left: 10%; }
-.road-container .stop-2 { left: 30%; }
-.road-container .stop-3 { left: 50%; }
-.road-container .stop-4 { left: 70%; }
-.road-container .stop-5 { left: 90%; }
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 5px;
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-button:hover {
-    background-color: #4cae4c;
-}
-
-#phaseContainer {
-    margin-top: 20px;
-    display: none;
+.modal-content {
+    background: white;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    width: 80%;
+    max-width: 500px;
 }
 
-#phaseContainer ul {
-    list-style: none;
-    padding: 0;
-}
-
-#phaseContainer ul li {
-    margin: 10px 0;
-}
-
-#phaseContainer input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-#phaseContainer button {
-    margin-top: 20px;
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
