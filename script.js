@@ -1,16 +1,14 @@
-let currentPhase = 1; // Starting phase
+let currentPhase = 1;
 
-// Start the game when the "Start" button is clicked
+// Start the game and show the roadmap
 function startGame() {
-    // Hide the start button and display the first phase tasks
-    document.getElementById('startButton').style.display = 'none';
-    openPhase(currentPhase); // Open the first phase
+    document.getElementById('coverPage').style.display = 'none';
+    document.getElementById('roadmap').style.display = 'flex';
 }
 
-// Function to open a specific phase and show its tasks
+// Open the phase modal with tasks
 function openPhase(phase) {
     if (phase <= currentPhase) {
-        // Show tasks for the selected phase
         const tasks = [
             ["Check in with manager", "Introduce yourself to team", "Ask for floor walk"],
             ["Learn about key brands", "Understand promotions", "Identify best-selling items"],
@@ -20,53 +18,49 @@ function openPhase(phase) {
         ];
 
         const taskList = tasks[phase - 1];
-        
         let taskHtml = '<ul>';
-        taskList.forEach(task => {
-            taskHtml += `<li><input type="checkbox" id="task-${phase}-${task}"> ${task}</li>`;
+        taskList.forEach((task, index) => {
+            taskHtml += `<li>
+                <input type="checkbox" id="task-${phase}-${index}" onclick="checkTasks(${phase})"> ${task}
+            </li>`;
         });
         taskHtml += '</ul>';
 
-        const phaseDiv = document.createElement('div');
-        phaseDiv.id = 'phase' + phase;
-        phaseDiv.innerHTML = `
-            <h2>Phase ${phase} Tasks</h2>
-            ${taskHtml}
-            <button onclick="completePhase(${phase})">Complete Phase ${phase}</button>
-        `;
-
-        document.getElementById('phaseContainer').innerHTML = '';
-        document.getElementById('phaseContainer').appendChild(phaseDiv);
-        document.getElementById('phaseContainer').style.display = 'block';
-
-        // Unlock the next stop
-        if (phase < 5) {
-            document.querySelector(`.stop-${phase}`).classList.remove('locked');
-            document.querySelector(`.stop-${phase}`).classList.add('unlocked');
-        }
+        document.getElementById('phaseTitle').innerText = `Phase ${phase} Tasks`;
+        document.getElementById('taskList').innerHTML = taskHtml;
+        document.getElementById('nextButton').disabled = true;
+        document.getElementById('phaseModal').style.display = 'flex';
     }
 }
 
-// Mark phase as completed and move to the next phase
-function completePhase(phase) {
-    // Check if all checkboxes are ticked
-    const checkboxes = document.querySelectorAll(`#phase${phase} input[type="checkbox"]`);
+// Check if all tasks in the current phase are completed
+function checkTasks(phase) {
+    const checkboxes = document.querySelectorAll(`#taskList input[type="checkbox"]`);
     const allChecked = Array.from(checkboxes).every(cb => cb.checked);
 
-    if (allChecked) {
-        // Move to the next phase
-        if (currentPhase < 5) {
-            currentPhase++;
-            openPhase(currentPhase); // Open the next phase
-        } else {
-            // Final congratulatory message and feedback form link
-            document.getElementById('phaseContainer').innerHTML = `
-                <h1>Congratulations! You completed the journey.</h1>
-                <p>Well done! You've made it through all the phases. Please take a moment to fill out the feedback form to help us improve:</p>
-                <a href="YOUR_FEEDBACK_FORM_LINK" target="_blank"><button>Fill Out Feedback Form</button></a>
-            `;
-        }
+    // Enable the "Next" button only if all tasks are checked
+    document.getElementById('nextButton').disabled = !allChecked;
+}
+
+// Close the modal and unlock the next phase
+function closeModal() {
+    document.getElementById('phaseModal').style.display = 'none';
+
+    // Unlock the next stop
+    if (currentPhase < 5) {
+        document.querySelector(`.stop-${currentPhase + 1}`).classList.remove('locked');
+        document.querySelector(`.stop-${currentPhase + 1}`).classList.add('unlocked');
+        currentPhase++;
     } else {
-        alert("Please complete all tasks for this phase.");
+        // Show congratulations message and feedback form
+        document.getElementById('roadmap').style.display = 'none';
+        document.body.innerHTML += `
+            <div class="modal">
+                <div class="modal-content">
+                    <h1>Congratulations!</h1>
+                    <p>You have completed the roadmap! Please fill out the feedback form:</p>
+                    <a href="YOUR_FEEDBACK_FORM_LINK" target="_blank"><button>Fill Feedback Form</button></a>
+                </div>
+            </div>`;
     }
 }
