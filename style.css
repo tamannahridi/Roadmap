@@ -9,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
 button {
@@ -28,16 +29,23 @@ button.gold-button {
 }
 
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+h1, p {
   text-align: center;
 }
 
 .phases-container {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .phase-button {
@@ -48,6 +56,10 @@ button.gold-button {
   color: white;
   cursor: not-allowed;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }
 
 .phase-button.unlocked {
@@ -79,15 +91,24 @@ button.gold-button {
   margin-bottom: 10px;
 }
 
-button {
-  margin-top: 10px;
-}
-
 button[disabled] {
   background-color: #888;
   cursor: not-allowed;
 }
 
-.phases-container {
-  margin-top: 30px;
+@media (max-width: 768px) {
+  .phase-button {
+    width: 80px;
+    height: 80px;
+    font-size: 12px;
+  }
+
+  .phases-container {
+    flex-direction: column;
+  }
+
+  .modal {
+    width: 90%;
+    max-width: 350px;
+  }
 }
