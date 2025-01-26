@@ -27,11 +27,12 @@
   </div>
 
   <!-- Phase Task Window (Initially Hidden) -->
-  <div id="phaseWindow" class="page" style="display: none;">
-    <div id="phaseTasks"></div>
-    <button id="nextBtn" onclick="nextPhase()" disabled>Next</button>
-    <button onclick="goToHomePage()">Return to Home</button>
-  </div>
+<div id="phaseWindow" class="page" style="display: none;">
+  <h2 id="currentPhase"></h2>
+  <div id="phaseTasks"></div>
+  <button id="nextBtn" onclick="nextPhase()" disabled>Next</button>
+  <button onclick="goToHomePage()">Return to Home</button>
+</div>
 
   <!-- Congratulations Page (Initially Hidden) -->
   <div id="congratulationsPage" class="page" style="display: none;">
