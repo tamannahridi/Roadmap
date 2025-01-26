@@ -18,16 +18,15 @@ function openPhase(phase) {
         ];
 
         const taskList = tasks[phase - 1];
-        let taskHtml = '<ul>';
+        let taskHtml = "";
         taskList.forEach((task, index) => {
             taskHtml += `<li>
                 <input type="checkbox" id="task-${phase}-${index}" onclick="checkTasks(${phase})"> ${task}
             </li>`;
         });
-        taskHtml += '</ul>';
 
         document.getElementById('phaseTitle').innerText = `Phase ${phase} Tasks`;
-        document.getElementById('taskList').innerHTML = taskHtml;
+        document.getElementById('taskList').innerHTML = `<ul>${taskHtml}</ul>`;
         document.getElementById('nextButton').disabled = true;
         document.getElementById('phaseModal').style.display = 'flex';
     }
@@ -54,13 +53,12 @@ function closeModal() {
     } else {
         // Show congratulations message and feedback form
         document.getElementById('roadmap').style.display = 'none';
-        document.body.innerHTML += `
-            <div class="modal">
-                <div class="modal-content">
-                    <h1>Congratulations!</h1>
-                    <p>You have completed the roadmap! Please fill out the feedback form:</p>
-                    <a href="YOUR_FEEDBACK_FORM_LINK" target="_blank"><button>Fill Feedback Form</button></a>
-                </div>
-            </div>`;
+        document.getElementById('congratulationsModal').style.display = 'flex';
     }
+}
+
+// Go back to the roadmap
+function goHome() {
+    document.getElementById('congratulationsModal').style.display = 'none';
+    document.getElementById('roadmap').style.display = 'flex';
 }
