@@ -50,6 +50,24 @@ function checkTasks(phase) {
   document.getElementById("nextButton").disabled = !allChecked;
 }
 
+// Unlock Phase 1 when Start button is clicked
+document.querySelector("#startBtn").addEventListener("click", function() {
+  // Hide cover page
+  document.getElementById("coverPage").style.display = "none";
+
+  // Show home page
+  document.getElementById("homePage").style.display = "block";
+
+  // Unlock Phase 1 button
+  document.getElementById("phase1").classList.remove("locked");
+  document.getElementById("phase1").classList.add("unlocked");
+  document.getElementById("phase1").disabled = false; // Enable button
+
+  // Change color to Harrods Gold
+  document.getElementById("phase1").style.backgroundColor = "#9b8b56";  // Harrods Gold
+});
+
+
 // Complete the phase and go to the home page
 function completePhase() {
   // Hide the modal, lock the current phase button
