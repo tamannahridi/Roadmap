@@ -37,7 +37,7 @@ function openPhase(phase) {
   });
 
   // Show the phase modal and buttons
-  document.getElementById("phaseModal").classList.add("active");
+  document.getElementById("phaseModal").classList.remove("hidden");
   document.getElementById("nextButton").disabled = true; // Disable next button initially
   document.getElementById("returnButton").style.display = "inline-block"; // Show return button
   document.getElementById("nextButton").style.display = "inline-block"; // Show next button
@@ -53,7 +53,7 @@ function checkTasks(phase) {
 // Complete the phase and go to the home page
 function completePhase() {
   // Hide the modal, lock the current phase button
-  document.getElementById("phaseModal").classList.remove("active");
+  document.getElementById("phaseModal").classList.add("hidden");
   const phaseButton = document.getElementById(`phase${currentPhase}`);
   phaseButton.classList.remove("unlocked");
   phaseButton.classList.add("locked");
@@ -72,7 +72,7 @@ function completePhase() {
 
 // Return to home
 function returnToHome() {
-  document.getElementById("phaseModal").classList.remove("active");
+  document.getElementById("phaseModal").classList.add("hidden");
   document.getElementById("homePage").classList.add("active");
 }
 
@@ -82,14 +82,3 @@ function goHome() {
   document.getElementById("homePage").classList.add("active");
 }
 
-// Hide Phase buttons until the game starts
-function hidePhaseButtons() {
-  // Initially hide the Phase buttons
-  const phaseButtons = document.querySelectorAll(".phase-button");
-  phaseButtons.forEach(button => button.style.display = "none");
-}
-
-function showPhaseButtons() {
-  const phaseButtons = document.querySelectorAll(".phase-button");
-  phaseButtons.forEach(button => button.style.display = "inline-block");
-}
