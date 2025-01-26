@@ -3,44 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contemporary x International Roadmap</title>
+  <title>Roadmap Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cover Page (Initially visible) -->
-<div id="coverPage">
-  <h1>Contemporary x International Roadmap</h1>
-  <p>Subtitle here...</p>
-  <button id="startBtn">Start</button>
-</div>
-
-<!-- Home Page (Initially hidden) -->
-<div id="homePage" style="display: none;">
-  <h2>Phases</h2>
-  <div class="phase-buttons">
-    <button id="phase1" class="phase-button locked" onclick="showPhase(1)">Phase 1</button>
-    <button id="phase2" class="phase-button locked" onclick="showPhase(2)" disabled>Phase 2</button>
-    <button id="phase3" class="phase-button locked" onclick="showPhase(3)" disabled>Phase 3</button>
-    <button id="phase4" class="phase-button locked" onclick="showPhase(4)" disabled>Phase 4</button>
-    <button id="phase5" class="phase-button locked" onclick="showPhase(5)" disabled>Phase 5</button>
-  </div>
-</div>
-
-
-  <!-- Phase Modal -->
-  <div id="phaseModal" class="modal hidden">
-    <h2 id="phaseTitle">Phase 1</h2>
-    <ul id="phaseTasks"></ul>
-    <button id="nextButton" class="gold-button" onclick="completePhase()" disabled>Next</button>
-    <button id="returnButton" class="gold-button" onclick="returnToHome()">Return</button>
+  <!-- Cover Page -->
+  <div id="coverPage" class="page">
+    <h1>Contemporary x International Roadmap</h1>
+    <p>A Journey Through Our Phases</p>
+    <button id="startBtn">Start</button>
   </div>
 
-  <!-- Congratulations Page -->
-  <div id="congratsPage" class="page hidden">
-    <h1>Congratulations!</h1>
+  <!-- Home Page -->
+  <div id="homePage" class="page" style="display: none;">
+    <h1>Welcome to the Roadmap</h1>
+    <div class="phases">
+      <button id="phase1" class="phaseButton locked" disabled onclick="showPhase(1)">Phase 1</button>
+      <button id="phase2" class="phaseButton locked" disabled onclick="showPhase(2)">Phase 2</button>
+      <button id="phase3" class="phaseButton locked" disabled onclick="showPhase(3)">Phase 3</button>
+      <button id="phase4" class="phaseButton locked" disabled onclick="showPhase(4)">Phase 4</button>
+      <button id="phase5" class="phaseButton locked" disabled onclick="showPhase(5)">Phase 5</button>
+    </div>
+  </div>
+
+  <!-- Phase Task Window (Initially Hidden) -->
+  <div id="phaseWindow" class="page" style="display: none;">
+    <div id="phaseTasks"></div>
+    <button id="nextBtn" onclick="nextPhase()" disabled>Next</button>
+    <button onclick="goToHomePage()">Return to Home</button>
+  </div>
+
+  <!-- Congratulations Page (Initially Hidden) -->
+  <div id="congratulationsPage" class="page" style="display: none;">
+    <h2>Congratulations!</h2>
     <p>You have completed all the phases!</p>
-    <button class="gold-button" onclick="goHome()">Go Home</button>
-    <p><a href="feedback-form-link">Fill out the form</a></p>
+    <a href="https://your-feedback-form-link.com" target="_blank">Fill out your feedback form</a>
+    <button onclick="goToHomePage()">Go to Home</button>
   </div>
 
   <script src="script.js"></script>
