@@ -12,8 +12,8 @@ const tasks = {
 
 // Start the journey
 function startJourney() {
-  document.getElementById("coverPage").classList.add("hidden");
-  document.getElementById("homePage").classList.remove("hidden");
+  document.getElementById("coverPage").classList.remove("active");
+  document.getElementById("homePage").classList.add("active");
 }
 
 // Open phase tasks
@@ -27,7 +27,7 @@ function openPhase(phase) {
     li.innerHTML = `<input type="checkbox" id="task-${index}" onclick="checkTasks(${phase})"> ${task}`;
     phaseTasks.appendChild(li);
   });
-  document.getElementById("phaseModal").classList.remove("hidden");
+  document.getElementById("phaseModal").classList.add("active");
 }
 
 // Check if all tasks are completed
@@ -39,7 +39,7 @@ function checkTasks(phase) {
 
 // Complete the phase
 function completePhase() {
-  document.getElementById("phaseModal").classList.add("hidden");
+  document.getElementById("phaseModal").classList.remove("active");
   const phaseButton = document.getElementById(`phase${currentPhase}`);
   phaseButton.classList.remove("unlocked");
   phaseButton.classList.add("locked");
@@ -50,19 +50,19 @@ function completePhase() {
     nextPhaseButton.classList.remove("locked");
     nextPhaseButton.classList.add("unlocked");
   } else {
-    document.getElementById("homePage").classList.add("hidden");
-    document.getElementById("congratsPage").classList.remove("hidden");
+    document.getElementById("homePage").classList.remove("active");
+    document.getElementById("congratsPage").classList.add("active");
   }
 }
 
 // Return to home
 function returnToHome() {
-  document.getElementById("phaseModal").classList.add("hidden");
-  document.getElementById("homePage").classList.remove("hidden");
+  document.getElementById("phaseModal").classList.remove("active");
+  document.getElementById("homePage").classList.add("active");
 }
 
 // Go home after finishing
 function goHome() {
-  document.getElementById("congratsPage").classList.add("hidden");
-  document.getElementById("homePage").classList.remove("hidden");
+  document.getElementById("congratsPage").classList.remove("active");
+  document.getElementById("homePage").classList.add("active");
 }
