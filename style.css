@@ -1,134 +1,103 @@
-/* Basic Styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f3f3f3;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
-.container {
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Landing Page Styles */
-#landing-page h1 {
-    font-size: 2rem;
-    color: #333;
-}
-
-#start-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#start-btn:hover {
-    background-color: #45a049;
-}
-
-/* Roadmap Styles */
-.roadmap-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+.road-container {
     position: relative;
+    width: 80%;
+    max-width: 1200px;
+    height: 400px;
+    background-image: url('images/road.png'); /* Replace with your road image URL */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin-bottom: 30px;
 }
 
 .stop {
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    position: relative;
-}
-
-.stop-title {
-    font-weight: bold;
-}
-
-.lock {
     position: absolute;
-    top: -15px;
-    right: -15px;
-    font-size: 1.5rem;
-    display: none;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
 }
 
-#stop1 .lock {
-    display: none;
+.stop.unlocked {
+    background-color: #ff5733; /* Red or any color for unlocked stops */
 }
 
-/* Tasks Form */
-#tasks {
-    margin-top: 40px;
-    text-align: left;
+.stop.locked {
+    background-color: #ccc; /* Grey for locked stops */
+    pointer-events: none;
 }
 
-#task-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+.stop-text {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: white;
 }
 
-#task-form button {
-    margin-top: 20px;
+.road-container .stop-1 { left: 10%; }
+.road-container .stop-2 { left: 30%; }
+.road-container .stop-3 { left: 50%; }
+.road-container .stop-4 { left: 70%; }
+.road-container .stop-5 { left: 90%; }
+
+button {
     padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #4CAF50;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #5cb85c;
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
 }
 
-#task-form button:hover {
-    background-color: #45a049;
+button:hover {
+    background-color: #4cae4c;
 }
 
-/* Congratulations Page */
-#congrats-page {
-    margin-top: 40px;
-    font-size: 1.5rem;
+#phaseContainer {
+    margin-top: 20px;
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
-#congrats-page a {
-    font-size: 1.2rem;
-    color: #007BFF;
-    text-decoration: none;
+#phaseContainer ul {
+    list-style: none;
+    padding: 0;
 }
 
-#congrats-page a:hover {
-    text-decoration: underline;
+#phaseContainer ul li {
+    margin: 10px 0;
 }
 
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .roadmap-container {
-        flex-direction: column;
-    }
-    .stop {
-        width: 80px;
-        height: 80px;
-        margin: 10px 0;
-    }
+#phaseContainer input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#phaseContainer button {
+    margin-top: 20px;
 }
