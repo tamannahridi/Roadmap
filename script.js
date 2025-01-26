@@ -1,126 +1,63 @@
-// Unlock Phase 1 when Start button is clicked
-document.querySelector("#startBtn").addEventListener("click", function() {
-  // Hide cover page
+// Handle Cover Page and Start Button
+document.getElementById("startBtn").onclick = function() {
   document.getElementById("coverPage").style.display = "none";
-
-  // Show home page
   document.getElementById("homePage").style.display = "block";
+  unlockPhase(1); // Unlock Phase 1 when starting
+};
 
-  // Unlock Phase 1 button
-  document.getElementById("phase1").classList.remove("locked");
-  document.getElementById("phase1").classList.add("unlocked");
-  document.getElementById("phase1").disabled = false; // Enable button
+// Unlock a Phase
+function unlockPhase(phase) {
+  document.getElementById("phase" + phase).disabled = false;
+  document.getElementById("phase" + phase).classList.remove("locked");
+  document.getElementById("phase" + phase).classList.add("unlocked");
+}
 
-  // Change color to Harrods Gold
-  document.getElementById("phase1").style.backgroundColor = "#9b8b56";  // Harrods Gold
-});
-
-// Show Phase tasks window when clicking on a Phase button
+// Show the Phase Tasks
 function showPhase(phase) {
-  // Hide Home Page
   document.getElementById("homePage").style.display = "none";
-
-  // Show Phase window
   document.getElementById("phaseWindow").style.display = "block";
+  const phaseTasks = getPhaseTasks(phase);
+  document.getElementById("phaseTasks").innerHTML = phaseTasks;
+  document.getElementById("nextBtn").disabled = true; // Disable Next button initially
+}
 
-  // Set the phase tasks dynamically based on the phase number
-  let tasksContent = '';
-  if (phase === 1) {
-    tasksContent = `
-      <h3>Phase 1 Tasks</h3>
-      <form id="tasksForm">
-        <input type="checkbox" id="task1"> Task 1<br>
-        <input type="checkbox" id="task2"> Task 2<br>
-        <input type="checkbox" id="task3"> Task 3<br>
-        <input type="checkbox" id="task4"> Task 4<br>
-      </form>
-    `;
-  } else if (phase === 2) {
-    tasksContent = `
-      <h3>Phase 2 Tasks</h3>
-      <form id="tasksForm">
-        <input type="checkbox" id="task1"> Task 1<br>
-        <input type="checkbox" id="task2"> Task 2<br>
-        <input type="checkbox" id="task3"> Task 3<br>
-        <input type="checkbox" id="task4"> Task 4<br>
-      </form>
-    `;
-  } else if (phase === 3) {
-    tasksContent = `
-      <h3>Phase 3 Tasks</h3>
-      <form id="tasksForm">
-        <input type="checkbox" id="task1"> Task 1<br>
-        <input type="checkbox" id="task2"> Task 2<br>
-        <input type="checkbox" id="task3"> Task 3<br>
-        <input type="checkbox" id="task4"> Task 4<br>
-      </form>
-    `;
-  } else if (phase === 4) {
-    tasksContent = `
-      <h3>Phase 4 Tasks</h3>
-      <form id="tasksForm">
-        <input type="checkbox" id="task1"> Task 1<br>
-        <input type="checkbox" id="task2"> Task 2<br>
-        <input type="checkbox" id="task3"> Task 3<br>
-        <input type="checkbox" id="task4"> Task 4<br>
-      </form>
-    `;
-  } else if (phase === 5) {
-    tasksContent = `
-      <h3>Phase 5 Tasks</h3>
-      <form id="tasksForm">
-        <input type="checkbox" id="task1"> Task 1<br>
-        <input type="checkbox" id="task2"> Task 2<br>
-        <input type="checkbox" id="task3"> Task 3<br>
-        <input type="checkbox" id="task4"> Task 4<br>
-      </form>
-    `;
-  }
+// Get Tasks for a Phase
+function getPhaseTasks(phase) {
+  const tasks = [
+    ["Task 1", "Task 2", "Task 3"], // Phase 1 tasks
+    ["Task 4", "Task 5", "Task 6"], // Phase 2 tasks
+    ["Task 7", "Task 8", "Task 9"], // Phase 3 tasks
+    ["Task 10", "Task 11", "Task 12"], // Phase 4 tasks
+    ["Task 13", "Task 14", "Task 15"] // Phase 5 tasks
+  ];
 
-  // Insert the dynamic tasks content into the phase window
-  document.getElementById("phaseTasks").innerHTML = tasksContent;
+  const taskHtml = tasks[phase - 1].map((task, index) => {
+    return `<label><input type="checkbox" id="task${phase}-${index + 1}" onchange="checkCompletion(${phase})"> ${task}</label><br>`;
+  }).join("");
 
-  // Enable or disable the Next button based on checkbox completion
-  document.getElementById("nextBtn").disabled = true;
+  return taskHtml;
+}
 
-  // Attach event listener to checkbox changes
-  let checkboxes = document.querySelectorAll("#tasksForm input");
-  checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener("change", function() {
-      let allChecked = Array.from(checkboxes).every(function(box) {
-        return box.checked;
-      });
-      document.getElementById("nextBtn").disabled = !allChecked;
-    });
-  });
+// Check if all checkboxes are checked
+function checkCompletion(phase) {
+  const tasks = document.querySelectorAll(`#phaseTasks input[type="checkbox"]`);
+  const allChecked = Array.from(tasks).every(task => task.checked);
+  document.getElementById("nextBtn").disabled = !allChecked;
 }
 
 // Go to Home Page
 function goToHomePage() {
-  document.getElementById("homePage").style.display = "block";
   document.getElementById("phaseWindow").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
 }
 
-// Proceed to the next Phase and unlock the next button
+// Move to the Next Phase
 function nextPhase() {
-  let phaseId = parseInt(document.getElementById("phaseTasks").querySelector("h3").innerText.split(' ')[1]);
+  const currentPhase = document.querySelector(".phaseButton.unlocked");
+  const nextPhaseNumber = parseInt(currentPhase.id.replace("phase", "")) + 1;
+  unlockPhase(nextPhaseNumber);
 
-  // Unlock the next phase button
-  if (phaseId < 5) {
-    let nextPhase = phaseId + 1;
-    let nextButton = document.getElementById(`phase${nextPhase}`);
-    nextButton.classList.remove("locked");
-    nextButton.classList.add("unlocked");
-    nextButton.disabled = false;
-    nextButton.style.backgroundColor = "#9b8b56"; // Harrods Gold
-  }
-
-  // If Phase 5 is completed, show the Congratulations page
-  if (phaseId === 5) {
-    document.getElementById("congratulationsPage").style.display = "block";
-    document.getElementById("phaseWindow").style.display = "none";
-  } else {
-    document.getElementById("homePage").style.display = "block";
-    document.getElementById("phaseWindow").style.display = "none";
-  }
+  // After next button click, go back to home page
+  document.getElementById("phaseWindow").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
 }
