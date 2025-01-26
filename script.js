@@ -28,6 +28,7 @@ function openPhase(phase) {
         document.getElementById('phaseTitle').innerText = `Phase ${phase} Tasks`;
         document.getElementById('taskList').innerHTML = `<ul>${taskHtml}</ul>`;
         document.getElementById('nextButton').disabled = true;
+        document.getElementById('errorMessage').style.display = 'none';
         document.getElementById('phaseModal').style.display = 'flex';
     }
 }
@@ -43,6 +44,14 @@ function checkTasks(phase) {
 
 // Close the modal and unlock the next phase
 function closeModal() {
+    const checkboxes = document.querySelectorAll(`#taskList input[type="checkbox"]`);
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+    if (!allChecked) {
+        document.getElementById('errorMessage').style.display = 'block';
+        return;
+    }
+
     document.getElementById('phaseModal').style.display = 'none';
 
     // Unlock the next stop
@@ -60,5 +69,13 @@ function closeModal() {
 // Go back to the roadmap
 function goHome() {
     document.getElementById('congratulationsModal').style.display = 'none';
-    document.getElementById('roadmap').style.display = 'flex';
+    document.getElementById('coverPage').style.display = 'flex';
+    currentPhase = 1;
+
+    // Reset roadmap and modal
+    const stops = document.querySelectorAll('.stop');
+    stops.forEach((stop, index) => {
+        stop.classList.add(index === 0 ? 'unlocked' : 'locked');
+        stop.classList.remove('unlocked');
+    });
 }
