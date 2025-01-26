@@ -14,11 +14,19 @@ const tasks = {
 function startJourney() {
   document.getElementById("coverPage").classList.remove("active");
   document.getElementById("homePage").classList.add("active");
+  hidePhaseButtons();
+  // Initialize buttons and lock Phase 2 to Phase 5
+  document.getElementById("phase1").classList.add("unlocked");
+  document.getElementById("phase2").classList.add("locked");
+  document.getElementById("phase3").classList.add("locked");
+  document.getElementById("phase4").classList.add("locked");
+  document.getElementById("phase5").classList.add("locked");
 }
 
 // Open phase tasks
 function openPhase(phase) {
   if (phase > currentPhase) return; // Prevent locked phases
+  
   document.getElementById("phaseTitle").textContent = `Phase ${phase}`;
   const phaseTasks = document.getElementById("phaseTasks");
   phaseTasks.innerHTML = ""; // Clear previous tasks
@@ -27,7 +35,12 @@ function openPhase(phase) {
     li.innerHTML = `<input type="checkbox" id="task-${index}" onclick="checkTasks(${phase})"> ${task}`;
     phaseTasks.appendChild(li);
   });
+
+  // Show the phase modal and buttons
   document.getElementById("phaseModal").classList.add("active");
+  document.getElementById("nextButton").disabled = true; // Disable next button initially
+  document.getElementById("returnButton").style.display = "inline-block"; // Show return button
+  document.getElementById("nextButton").style.display = "inline-block"; // Show next button
 }
 
 // Check if all tasks are completed
@@ -37,13 +50,15 @@ function checkTasks(phase) {
   document.getElementById("nextButton").disabled = !allChecked;
 }
 
-// Complete the phase
+// Complete the phase and go to the home page
 function completePhase() {
+  // Hide the modal, lock the current phase button
   document.getElementById("phaseModal").classList.remove("active");
   const phaseButton = document.getElementById(`phase${currentPhase}`);
   phaseButton.classList.remove("unlocked");
   phaseButton.classList.add("locked");
 
+  // Unlock the next phase button
   currentPhase++;
   if (currentPhase <= 5) {
     const nextPhaseButton = document.getElementById(`phase${currentPhase}`);
@@ -65,4 +80,16 @@ function returnToHome() {
 function goHome() {
   document.getElementById("congratsPage").classList.remove("active");
   document.getElementById("homePage").classList.add("active");
+}
+
+// Hide Phase buttons until the game starts
+function hidePhaseButtons() {
+  // Initially hide the Phase buttons
+  const phaseButtons = document.querySelectorAll(".phase-button");
+  phaseButtons.forEach(button => button.style.display = "none");
+}
+
+function showPhaseButtons() {
+  const phaseButtons = document.querySelectorAll(".phase-button");
+  phaseButtons.forEach(button => button.style.display = "inline-block");
 }
