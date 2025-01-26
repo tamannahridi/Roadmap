@@ -19,6 +19,7 @@ function showPhase(phase) {
   const phaseTasks = getPhaseTasks(phase);
   document.getElementById("phaseTasks").innerHTML = phaseTasks;
   document.getElementById("nextBtn").disabled = true; // Disable Next button initially
+  document.getElementById("currentPhase").textContent = "Phase " + phase + " Tasks"; // Update phase title
 }
 
 // Get Tasks for a Phase
