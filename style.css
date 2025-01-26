@@ -131,6 +131,13 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
+/* Error Message */
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 /* Home Button */
 .home-button {
     margin-top: 20px;
