@@ -117,17 +117,18 @@ button:disabled {
     cursor: not-allowed;
 }
 
-ul {
+#taskList ul {
     list-style: none;
     padding: 0;
-    text-align: left;
 }
 
-li {
+#taskList li {
+    display: flex;
+    align-items: center;
     margin: 10px 0;
 }
 
-input[type="checkbox"] {
+#taskList input[type="checkbox"] {
     margin-right: 10px;
 }
 
