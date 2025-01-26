@@ -3,22 +3,22 @@ let currentPhase = 1;
 
 // Tasks for each phase
 const tasks = {
-  1: ["Check in with the retail manager", "Introduce yourself to team members", "Ask for a brief floor walk"],
-  2: ["Familiarize yourself with the brands", "Learn key product features", "Understand promotions and incentives"],
-  3: ["Engage with customers", "Assist with cross-department pairings", "Provide fresh style suggestions"],
-  4: ["Network with team members", "Seek advice on techniques", "Document key learnings"],
-  5: ["Tick all checkboxes", "Submit feedback form", "Wrap up the day!"],
+  1: ["Task 1 for Phase 1", "Task 2 for Phase 1", "Task 3 for Phase 1"],
+  2: ["Task 1 for Phase 2", "Task 2 for Phase 2", "Task 3 for Phase 2"],
+  3: ["Task 1 for Phase 3", "Task 2 for Phase 3", "Task 3 for Phase 3"],
+  4: ["Task 1 for Phase 4", "Task 2 for Phase 4", "Task 3 for Phase 4"],
+  5: ["Task 1 for Phase 5", "Task 2 for Phase 5", "Task 3 for Phase 5"],
 };
 
 // Start the journey
 function startJourney() {
-  document.getElementById("coverPage").style.display = "none";
-  document.getElementById("roadmap").style.display = "flex";
+  document.getElementById("coverPage").classList.add("hidden");
+  document.getElementById("homePage").classList.remove("hidden");
 }
 
-// Open phase modal
+// Open phase tasks
 function openPhase(phase) {
-  if (phase > currentPhase) return; // Locked phase
+  if (phase > currentPhase) return; // Prevent locked phases
   document.getElementById("phaseTitle").textContent = `Phase ${phase}`;
   const phaseTasks = document.getElementById("phaseTasks");
   phaseTasks.innerHTML = ""; // Clear previous tasks
@@ -27,45 +27,42 @@ function openPhase(phase) {
     li.innerHTML = `<input type="checkbox" id="task-${index}" onclick="checkTasks(${phase})"> ${task}`;
     phaseTasks.appendChild(li);
   });
-  document.getElementById("phaseModal").style.display = "flex";
+  document.getElementById("phaseModal").classList.remove("hidden");
 }
 
 // Check if all tasks are completed
 function checkTasks(phase) {
   const checkboxes = document.querySelectorAll("#phaseTasks input[type=checkbox]");
   const allChecked = Array.from(checkboxes).every((checkbox) => checkbox.checked);
-  document.getElementById("nextButton").style.display = allChecked ? "block" : "none";
+  document.getElementById("nextButton").disabled = !allChecked;
 }
 
-// Complete the current phase
+// Complete the phase
 function completePhase() {
-  document.getElementById("phaseModal").style.display = "none";
-  const stop = document.getElementById(`phase${currentPhase}`);
-  stop.classList.remove("unlocked");
-  stop.classList.add("locked");
+  document.getElementById("phaseModal").classList.add("hidden");
+  const phaseButton = document.getElementById(`phase${currentPhase}`);
+  phaseButton.classList.remove("unlocked");
+  phaseButton.classList.add("locked");
 
   currentPhase++;
-  const nextStop = document.getElementById(`phase${currentPhase}`);
-  if (nextStop) nextStop.classList.remove("locked");
-  document.getElementById("roadmap").style.display = "flex";
+  if (currentPhase <= 5) {
+    const nextPhaseButton = document.getElementById(`phase${currentPhase}`);
+    nextPhaseButton.classList.remove("locked");
+    nextPhaseButton.classList.add("unlocked");
+  } else {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("congratsPage").classList.remove("hidden");
+  }
 }
 
-// Return to roadmap
-function returnToRoadmap() {
-  document.getElementById("phaseModal").style.display = "none";
-  document.getElementById("roadmap").style.display = "flex";
+// Return to home
+function returnToHome() {
+  document.getElementById("phaseModal").classList.add("hidden");
+  document.getElementById("homePage").classList.remove("hidden");
 }
 
-// Go back to the cover page
+// Go home after finishing
 function goHome() {
-  document.getElementById("congratulationsModal").style.display = "none";
-  document.getElementById("roadmap").style.display = "none";
-  document.getElementById("coverPage").style.display = "flex";
-  currentPhase = 1;
-
-  // Reset stops
-  document.querySelectorAll(".stop").forEach((stop, index) => {
-    stop.classList.remove("locked");
-    stop.classList.add(index === 0 ? "unlocked" : "locked");
-  });
+  document.getElementById("congratsPage").classList.add("hidden");
+  document.getElementById("homePage").classList.remove("hidden");
 }
