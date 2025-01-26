@@ -10,6 +10,7 @@ function unlockPhase(phase) {
   document.getElementById("phase" + phase).disabled = false;
   document.getElementById("phase" + phase).classList.remove("locked");
   document.getElementById("phase" + phase).classList.add("unlocked");
+  document.getElementById("phase" + phase).style.backgroundColor = "#D4AF37"; // Harrods gold
 }
 
 // Show the Phase Tasks
@@ -54,9 +55,11 @@ function goToHomePage() {
 
 // Move to the Next Phase
 function nextPhase() {
-  const currentPhase = document.querySelector(".phaseButton.unlocked");
-  const nextPhaseNumber = parseInt(currentPhase.id.replace("phase", "")) + 1;
-  unlockPhase(nextPhaseNumber);
+  // Get the current phase number
+  const currentPhase = parseInt(document.querySelector(".phaseButton.unlocked").id.replace("phase", ""));
+
+  // Unlock the next phase
+  unlockPhase(currentPhase + 1);
 
   // After next button click, go back to home page
   document.getElementById("phaseWindow").style.display = "none";
