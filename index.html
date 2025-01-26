@@ -7,34 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cover Page -->
-  <div id="coverPage" class="page active">
-    <h1>Contemporary x International Roadmap</h1>
-    <p>Embark on a journey to complete the roadmap tasks.</p>
-    <button class="gold-button" onclick="startJourney()">Start</button>
-  </div>
+  <!-- Cover Page (Initially visible) -->
+<div id="coverPage">
+  <h1>Contemporary x International Roadmap</h1>
+  <p>Subtitle here...</p>
+  <button id="startBtn">Start</button>
+</div>
 
-  <!-- Home Page -->
-  <div id="homePage" class="page">
-    <h1>Welcome to the Phases</h1>
-    <div class="phases-container">
-      <div id="phase1" class="phase-button" onclick="openPhase(1)">
-        <span>Phase 1</span>
-      </div>
-      <div id="phase2" class="phase-button locked" onclick="openPhase(2)">
-        <span>Phase 2</span>
-      </div>
-      <div id="phase3" class="phase-button locked" onclick="openPhase(3)">
-        <span>Phase 3</span>
-      </div>
-      <div id="phase4" class="phase-button locked" onclick="openPhase(4)">
-        <span>Phase 4</span>
-      </div>
-      <div id="phase5" class="phase-button locked" onclick="openPhase(5)">
-        <span>Phase 5</span>
-      </div>
-    </div>
+<!-- Home Page (Initially hidden) -->
+<div id="homePage" style="display: none;">
+  <h2>Phases</h2>
+  <div class="phase-buttons">
+    <button id="phase1" class="phase-button locked" onclick="showPhase(1)">Phase 1</button>
+    <button id="phase2" class="phase-button locked" onclick="showPhase(2)" disabled>Phase 2</button>
+    <button id="phase3" class="phase-button locked" onclick="showPhase(3)" disabled>Phase 3</button>
+    <button id="phase4" class="phase-button locked" onclick="showPhase(4)" disabled>Phase 4</button>
+    <button id="phase5" class="phase-button locked" onclick="showPhase(5)" disabled>Phase 5</button>
   </div>
+</div>
+
 
   <!-- Phase Modal -->
   <div id="phaseModal" class="modal hidden">
