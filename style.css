@@ -1,152 +1,101 @@
-/* General Styles */
+/* Basic Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #0e2a23; /* Harrods green */
-  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Cover Page */
-#coverPage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;  /* Full height */
-  background-color: #0E2A23; /* harrods green */
-}
-
-#coverPage h1 {
-  font-size: 36px;
-  text-align: center;
-}
-
-#coverPage p {
-  font-size: 20px;
-  text-align: center;
-}
-
-#coverPage button {
-  font-size: 18px;
-  padding: 10px 20px;
-  margin-top: 20px;
-}
-
-/* Home Page */
-#homePage {
-  display: none;  /* Hidden by default */
-  text-align: center;
-  padding: 20px;
-}
-
-.phase-button {
-  width: 150px;
-  height: 50px;
-  margin: 10px;
-  cursor: pointer;
-  background-color: #d3d3d3; /* Locked state */
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 25px;
-}
-
-.phase-button.locked {
-  cursor: not-allowed;
-}
-
-.phase-button.unlocked {
-  background-color: #9b8b56; /* Harrods Gold */
-}
-
-
-button {
-  padding: 10px 20px;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button.gold-button {
-  background-color: #c5a06e; /* Harrods gold */
-  color: #0e2a23;
-}
-
-.hidden {
-  display: none;
-}
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
+  min-height: 100vh;
+  background-color: #0b4f0d; /* Harrods Green */
 }
 
 h1, p {
   text-align: center;
+  color: #fff;
 }
 
-.phases-container {
+button {
+  background-color: #e1b84d; /* Harrods Gold */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #d1a22e; /* Darker Harrods Gold */
+}
+
+.page {
+  display: none;
+  text-align: center;
+}
+
+#coverPage {
+  display: block;
+}
+
+.phases {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 30px;
+  justify-content: space-around;
+  margin-top: 50px;
 }
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: #0e2a23;
+.phaseButton {
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 400px;
+  font-size: 18px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-color: #3c3c3c;
+  color: #fff;
+  position: relative;
 }
 
-.modal ul {
-  list-style-type: none;
-  padding: 0;
+.phaseButton.locked {
+  background-color: #a2a2a2;
 }
 
-.modal ul li {
+.phaseButton.unlocked {
+  background-color: #e1b84d;
+}
+
+#phaseWindow {
+  display: none;
   text-align: left;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
-button[disabled] {
-  background-color: #888;
-  cursor: not-allowed;
+#phaseTasks {
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .phase-button {
+#phaseTasks input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#nextBtn, button {
+  margin-top: 20px;
+}
+
+#nextBtn:disabled {
+  background-color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .phases {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .phaseButton {
     width: 80px;
     height: 80px;
-    font-size: 12px;
-  }
-
-  .phases-container {
-    flex-direction: column;
-  }
-
-  .modal {
-    width: 90%;
-    max-width: 350px;
+    font-size: 14px;
   }
 }
