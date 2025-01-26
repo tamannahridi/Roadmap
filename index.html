@@ -14,30 +14,40 @@
     <button class="button gold-button" onclick="startJourney()">Start</button>
   </div>
 
-  <!-- Roadmap Page -->
-  <div id="roadmap" class="page hidden">
-    <h2>Phases</h2>
-    <div class="roadmap-container">
-      <div class="stop unlocked" id="phase1" onclick="openPhase(1)">Phase 1</div>
-      <div class="stop locked" id="phase2" onclick="openPhase(2)">Phase 2</div>
-      <div class="stop locked" id="phase3" onclick="openPhase(3)">Phase 3</div>
-      <div class="stop locked" id="phase4" onclick="openPhase(4)">Phase 4</div>
-      <div class="stop locked" id="phase5" onclick="openPhase(5)">Phase 5</div>
+  <!-- Home Page -->
+  <div id="homePage" class="page hidden">
+    <h1>Contemporary x International Roadmap</h1>
+    <div class="phases-container">
+      <div class="phase">
+        <button id="phase1" class="phase-button unlocked" onclick="openPhase(1)">Phase 1</button>
+      </div>
+      <div class="phase">
+        <button id="phase2" class="phase-button locked" onclick="openPhase(2)">Phase 2</button>
+      </div>
+      <div class="phase">
+        <button id="phase3" class="phase-button locked" onclick="openPhase(3)">Phase 3</button>
+      </div>
+      <div class="phase">
+        <button id="phase4" class="phase-button locked" onclick="openPhase(4)">Phase 4</button>
+      </div>
+      <div class="phase">
+        <button id="phase5" class="phase-button locked" onclick="openPhase(5)">Phase 5</button>
+      </div>
     </div>
   </div>
 
-  <!-- Phase Modal -->
+  <!-- Phase Tasks Window -->
   <div id="phaseModal" class="modal hidden">
-    <h3 id="phaseTitle"></h3>
+    <h2 id="phaseTitle"></h2>
     <ul id="phaseTasks"></ul>
-    <button id="nextButton" class="button gold-button hidden" onclick="completePhase()">Next</button>
-    <button id="returnButton" class="button gold-button" onclick="returnToRoadmap()">Return</button>
+    <button id="nextButton" class="button gold-button" onclick="completePhase()" disabled>Next</button>
+    <button id="returnButton" class="button gold-button" onclick="returnToHome()">Return</button>
   </div>
 
-  <!-- Congratulations Modal -->
-  <div id="congratulationsModal" class="modal hidden">
-    <h3>Congratulations!</h3>
-    <p>You’ve completed all phases successfully!</p>
+  <!-- Congratulations Window -->
+  <div id="congratsPage" class="page hidden">
+    <h2>Congratulations!</h2>
+    <p>You’ve successfully completed all phases!</p>
     <a href="https://example.com/feedback" target="_blank" class="button gold-button">Fill Feedback Form</a>
     <button class="button gold-button" onclick="goHome()">Home</button>
   </div>
