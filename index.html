@@ -1,62 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contemporary x International Roadmap</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contemporary x International Roadmap</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1 class="main-title">Contemporary x International Roadmap</h1>
-        <p class="subtitle">Your journey starts here</p>
-    </div>
+  <!-- Cover Page -->
+  <div id="coverPage" class="page">
+    <h1>Contemporary x International Roadmap</h1>
+    <p>Your journey to success begins here!</p>
+    <button class="button gold-button" onclick="startJourney()">Start</button>
+  </div>
 
-    <!-- Cover Page -->
-    <div id="coverPage" class="cover-page">
-        <button id="startButton" class="button gold-button" onclick="startGame()">Start</button>
+  <!-- Roadmap Page -->
+  <div id="roadmap" class="page hidden">
+    <h2>Phases</h2>
+    <div class="roadmap-container">
+      <div class="stop unlocked" id="phase1" onclick="openPhase(1)">Phase 1</div>
+      <div class="stop locked" id="phase2" onclick="openPhase(2)">Phase 2</div>
+      <div class="stop locked" id="phase3" onclick="openPhase(3)">Phase 3</div>
+      <div class="stop locked" id="phase4" onclick="openPhase(4)">Phase 4</div>
+      <div class="stop locked" id="phase5" onclick="openPhase(5)">Phase 5</div>
     </div>
+  </div>
 
-    <!-- Roadmap (hidden initially) -->
-    <div id="roadmap" class="road-container" style="display: none;">
-        <div class="stop stop-1 unlocked" onclick="openPhase(1)">
-            <span class="stop-text">Phase 1</span>
-        </div>
-        <div class="stop stop-2 locked" onclick="openPhase(2)">
-            <span class="stop-text">Phase 2</span>
-        </div>
-        <div class="stop stop-3 locked" onclick="openPhase(3)">
-            <span class="stop-text">Phase 3</span>
-        </div>
-        <div class="stop stop-4 locked" onclick="openPhase(4)">
-            <span class="stop-text">Phase 4</span>
-        </div>
-        <div class="stop stop-5 locked" onclick="openPhase(5)">
-            <span class="stop-text">Phase 5</span>
-        </div>
-    </div>
+  <!-- Phase Modal -->
+  <div id="phaseModal" class="modal hidden">
+    <h3 id="phaseTitle"></h3>
+    <ul id="phaseTasks"></ul>
+    <button id="nextButton" class="button gold-button hidden" onclick="completePhase()">Next</button>
+    <button id="returnButton" class="button gold-button" onclick="returnToRoadmap()">Return</button>
+  </div>
 
-    <!-- Modal Window for Phase Details -->
-    <div id="phaseModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2 id="phaseTitle"></h2>
-            <div id="taskList"></div>
-            <p id="errorMessage" class="error-message" style="display: none;">Please complete all tasks for this phase.</p>
-            <button id="returnButton" class="button gold-button" onclick="returnToRoadmap()">Return</button>
-            <button id="nextButton" class="button gold-button" disabled onclick="closeModal()">Next</button>
-        </div>
-    </div>
+  <!-- Congratulations Modal -->
+  <div id="congratulationsModal" class="modal hidden">
+    <h3>Congratulations!</h3>
+    <p>You’ve completed all phases successfully!</p>
+    <a href="https://example.com/feedback" target="_blank" class="button gold-button">Fill Feedback Form</a>
+    <button class="button gold-button" onclick="goHome()">Home</button>
+  </div>
 
-    <!-- Congratulations Modal -->
-    <div id="congratulationsModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h1>Congratulations!</h1>
-            <p>You have completed the roadmap! Please fill out the feedback form:</p>
-            <a href="YOUR_FEEDBACK_FORM_LINK" target="_blank"><button class="button gold-button">Fill Feedback Form</button></a>
-            <button class="button gold-button home-button" onclick="goHome()">Home</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
