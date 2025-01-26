@@ -1,89 +1,71 @@
+// Global variables
 let currentPhase = 1;
 
-// Start the game and show the roadmap
-function startGame() {
-    document.getElementById('coverPage').style.display = 'none';
-    document.getElementById('roadmap').style.display = 'flex';
+// Tasks for each phase
+const tasks = {
+  1: ["Check in with the retail manager", "Introduce yourself to team members", "Ask for a brief floor walk"],
+  2: ["Familiarize yourself with the brands", "Learn key product features", "Understand promotions and incentives"],
+  3: ["Engage with customers", "Assist with cross-department pairings", "Provide fresh style suggestions"],
+  4: ["Network with team members", "Seek advice on techniques", "Document key learnings"],
+  5: ["Tick all checkboxes", "Submit feedback form", "Wrap up the day!"],
+};
+
+// Start the journey
+function startJourney() {
+  document.getElementById("coverPage").style.display = "none";
+  document.getElementById("roadmap").style.display = "flex";
 }
 
-// Open the phase modal with tasks
+// Open phase modal
 function openPhase(phase) {
-    if (phase <= currentPhase) {
-        const tasks = [
-            ["Check in with manager", "Introduce yourself to team", "Ask for floor walk"],
-            ["Learn about key brands", "Understand promotions", "Identify best-selling items"],
-            ["Shadow a team member", "Assist customers", "Cross-sell products"],
-            ["Ask for feedback", "Document key learnings", "Network with colleagues"],
-            ["Fill out feedback form", "Congratulate yourself", "End of the journey"]
-        ];
-
-        const taskList = tasks[phase - 1];
-        let taskHtml = "";
-        taskList.forEach((task, index) => {
-            taskHtml += `<li>
-                <input type="checkbox" id="task-${phase}-${index}" onclick="checkTasks(${phase})"> ${task}
-            </li>`;
-        });
-
-        document.getElementById('phaseTitle').innerText = `Phase ${phase} Tasks`;
-        document.getElementById('taskList').innerHTML = `<ul>${taskHtml}</ul>`;
-        document.getElementById('nextButton').disabled = true;
-        document.getElementById('errorMessage').style.display = 'none';
-        document.getElementById('phaseModal').style.display = 'flex';
-    }
+  if (phase > currentPhase) return; // Locked phase
+  document.getElementById("phaseTitle").textContent = `Phase ${phase}`;
+  const phaseTasks = document.getElementById("phaseTasks");
+  phaseTasks.innerHTML = ""; // Clear previous tasks
+  tasks[phase].forEach((task, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<input type="checkbox" id="task-${index}" onclick="checkTasks(${phase})"> ${task}`;
+    phaseTasks.appendChild(li);
+  });
+  document.getElementById("phaseModal").style.display = "flex";
 }
 
-// Check if all tasks in the current phase are completed
+// Check if all tasks are completed
 function checkTasks(phase) {
-    const checkboxes = document.querySelectorAll(`#taskList input[type="checkbox"]`);
-    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-
-    // Enable the "Next" button only if all tasks are checked
-    document.getElementById('nextButton').disabled = !allChecked;
+  const checkboxes = document.querySelectorAll("#phaseTasks input[type=checkbox]");
+  const allChecked = Array.from(checkboxes).every((checkbox) => checkbox.checked);
+  document.getElementById("nextButton").style.display = allChecked ? "block" : "none";
 }
 
-// Close the modal and unlock the next phase
-function closeModal() {
-    const checkboxes = document.querySelectorAll(`#taskList input[type="checkbox"]`);
-    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+// Complete the current phase
+function completePhase() {
+  document.getElementById("phaseModal").style.display = "none";
+  const stop = document.getElementById(`phase${currentPhase}`);
+  stop.classList.remove("unlocked");
+  stop.classList.add("locked");
 
-    if (!allChecked) {
-        document.getElementById('errorMessage').style.display = 'block';
-        return;
-    }
-
-    document.getElementById('phaseModal').style.display = 'none';
-
-    // Unlock the next stop
-    if (currentPhase < 5) {
-        document.querySelector(`.stop-${currentPhase + 1}`).classList.remove('locked');
-        document.querySelector(`.stop-${currentPhase + 1}`).classList.add('unlocked');
-        currentPhase++;
-    } else {
-        // Show congratulations message and feedback form
-        document.getElementById('roadmap').style.display = 'none';
-        document.getElementById('congratulationsModal').style.display = 'flex';
-    }
+  currentPhase++;
+  const nextStop = document.getElementById(`phase${currentPhase}`);
+  if (nextStop) nextStop.classList.remove("locked");
+  document.getElementById("roadmap").style.display = "flex";
 }
 
-// Return to the roadmap (home page)
+// Return to roadmap
 function returnToRoadmap() {
-    document.getElementById('phaseModal').style.display = 'none'; // Hide the modal
-    document.getElementById('roadmap').style.display = 'flex';    // Show the roadmap
+  document.getElementById("phaseModal").style.display = "none";
+  document.getElementById("roadmap").style.display = "flex";
 }
 
-
-// Reset and go back to the cover page
+// Go back to the cover page
 function goHome() {
-    document.getElementById('congratulationsModal').style.display = 'none';
-    document.getElementById('roadmap').style.display = 'none';
-    document.getElementById('coverPage').style.display = 'flex';
-    currentPhase = 1;
+  document.getElementById("congratulationsModal").style.display = "none";
+  document.getElementById("roadmap").style.display = "none";
+  document.getElementById("coverPage").style.display = "flex";
+  currentPhase = 1;
 
-    // Reset roadmap and modal
-    const stops = document.querySelectorAll('.stop');
-    stops.forEach((stop, index) => {
-        stop.classList.add(index === 0 ? 'unlocked' : 'locked');
-        stop.classList.remove('unlocked');
-    });
+  // Reset stops
+  document.querySelectorAll(".stop").forEach((stop, index) => {
+    stop.classList.remove("locked");
+    stop.classList.add(index === 0 ? "unlocked" : "locked");
+  });
 }
