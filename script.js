@@ -23,7 +23,7 @@ function openPhase(phase) {
         
         let taskHtml = '<ul>';
         taskList.forEach(task => {
-            taskHtml += `<li><input type="checkbox"> ${task}</li>`;
+            taskHtml += `<li><input type="checkbox" id="task-${phase}-${task}"> ${task}</li>`;
         });
         taskHtml += '</ul>';
 
@@ -59,10 +59,14 @@ function completePhase(phase) {
             currentPhase++;
             openPhase(currentPhase); // Open the next phase
         } else {
-            // Final congratulatory message
-            document.getElementById('phaseContainer').innerHTML = "<h1>Congratulations! You completed the journey.</h1>";
+            // Final congratulatory message and feedback form link
+            document.getElementById('phaseContainer').innerHTML = `
+                <h1>Congratulations! You completed the journey.</h1>
+                <p>Well done! You've made it through all the phases. Please take a moment to fill out the feedback form to help us improve:</p>
+                <a href="YOUR_FEEDBACK_FORM_LINK" target="_blank"><button>Fill Out Feedback Form</button></a>
+            `;
         }
     } else {
-        alert("Please complete all tasks before proceeding.");
+        alert("Please complete all tasks for this phase.");
     }
 }
