@@ -30,6 +30,9 @@ button.gold-button {
 button {
   padding: 10px 20px;
   border: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-radius: 5px;
   cursor: pointer;
 }
