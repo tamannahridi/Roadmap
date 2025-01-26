@@ -66,10 +66,12 @@ function closeModal() {
     }
 }
 
-// Return to the roadmap
+// Return to the roadmap (home page)
 function returnToRoadmap() {
-    document.getElementById('phaseModal').style.display = 'none';
+    document.getElementById('phaseModal').style.display = 'none'; // Hide the modal
+    document.getElementById('roadmap').style.display = 'flex';    // Show the roadmap
 }
+
 
 // Reset and go back to the cover page
 function goHome() {
