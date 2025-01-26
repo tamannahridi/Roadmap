@@ -66,9 +66,15 @@ function closeModal() {
     }
 }
 
-// Go back to the roadmap
+// Return to the roadmap
+function returnToRoadmap() {
+    document.getElementById('phaseModal').style.display = 'none';
+}
+
+// Reset and go back to the cover page
 function goHome() {
     document.getElementById('congratulationsModal').style.display = 'none';
+    document.getElementById('roadmap').style.display = 'none';
     document.getElementById('coverPage').style.display = 'flex';
     currentPhase = 1;
 
