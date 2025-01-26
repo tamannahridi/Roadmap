@@ -8,14 +8,14 @@
 </head>
 <body>
   <!-- Cover Page -->
-  <div id="coverPage" class="page">
+  <div id="coverPage" class="page active">
     <h1>Contemporary x International Roadmap</h1>
     <p>Your journey to success begins here!</p>
     <button class="button gold-button" onclick="startJourney()">Start</button>
   </div>
 
   <!-- Home Page -->
-  <div id="homePage" class="page hidden">
+  <div id="homePage" class="page">
     <h1>Contemporary x International Roadmap</h1>
     <div class="phases-container">
       <div class="phase">
@@ -37,7 +37,7 @@
   </div>
 
   <!-- Phase Tasks Window -->
-  <div id="phaseModal" class="modal hidden">
+  <div id="phaseModal" class="modal">
     <h2 id="phaseTitle"></h2>
     <ul id="phaseTasks"></ul>
     <button id="nextButton" class="button gold-button" onclick="completePhase()" disabled>Next</button>
@@ -45,7 +45,7 @@
   </div>
 
   <!-- Congratulations Window -->
-  <div id="congratsPage" class="page hidden">
+  <div id="congratsPage" class="page">
     <h2>Congratulations!</h2>
     <p>You’ve successfully completed all phases!</p>
     <a href="https://example.com/feedback" target="_blank" class="button gold-button">Fill Feedback Form</a>
