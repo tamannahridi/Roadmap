@@ -1,35 +1,68 @@
+let currentPhase = 1; // Starting phase
+
+// Start the game when the "Start" button is clicked
 function startGame() {
-    document.getElementById("landing-page").style.display = "none";
-    document.getElementById("roadmap-page").style.display = "block";
+    // Hide the start button and display the first phase tasks
+    document.getElementById('startButton').style.display = 'none';
+    openPhase(currentPhase); // Open the first phase
 }
 
-function unlockStop(stopId) {
-    document.getElementById(stopId).style.backgroundColor = "#4CAF50";
-    document.getElementById(stopId).querySelector('.lock').style.display = "none";
+// Function to open a specific phase and show its tasks
+function openPhase(phase) {
+    if (phase <= currentPhase) {
+        // Show tasks for the selected phase
+        const tasks = [
+            ["Check in with manager", "Introduce yourself to team", "Ask for floor walk"],
+            ["Learn about key brands", "Understand promotions", "Identify best-selling items"],
+            ["Shadow a team member", "Assist customers", "Cross-sell products"],
+            ["Ask for feedback", "Document key learnings", "Network with colleagues"],
+            ["Fill out feedback form", "Congratulate yourself", "End of the journey"]
+        ];
+
+        const taskList = tasks[phase - 1];
+        
+        let taskHtml = '<ul>';
+        taskList.forEach(task => {
+            taskHtml += `<li><input type="checkbox"> ${task}</li>`;
+        });
+        taskHtml += '</ul>';
+
+        const phaseDiv = document.createElement('div');
+        phaseDiv.id = 'phase' + phase;
+        phaseDiv.innerHTML = `
+            <h2>Phase ${phase} Tasks</h2>
+            ${taskHtml}
+            <button onclick="completePhase(${phase})">Complete Phase ${phase}</button>
+        `;
+
+        document.getElementById('phaseContainer').innerHTML = '';
+        document.getElementById('phaseContainer').appendChild(phaseDiv);
+        document.getElementById('phaseContainer').style.display = 'block';
+
+        // Unlock the next stop
+        if (phase < 5) {
+            document.querySelector(`.stop-${phase}`).classList.remove('locked');
+            document.querySelector(`.stop-${phase}`).classList.add('unlocked');
+        }
+    }
 }
 
-function showTasks(phase) {
-    document.getElementById("tasks").style.display = "block";
-    document.getElementById("tasks").querySelector("h2").innerText = "Phase " + phase + " Tasks";
-    document.getElementById("next-btn").setAttribute("data-phase", phase);
-}
+// Mark phase as completed and move to the next phase
+function completePhase(phase) {
+    // Check if all checkboxes are ticked
+    const checkboxes = document.querySelectorAll(`#phase${phase} input[type="checkbox"]`);
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
 
-function nextPhase() {
-    let currentPhase = parseInt(document.getElementById("next-btn").getAttribute("data-phase"));
-    
-    // Check if tasks are completed
-    if (document.querySelectorAll(`#task-form input[type="checkbox"]:checked`).length === 3) {
-        document.getElementById("tasks").style.display = "none";
-        unlockStop("stop" + (currentPhase + 1));
+    if (allChecked) {
+        // Move to the next phase
         if (currentPhase < 5) {
-            showTasks(currentPhase + 1);
+            currentPhase++;
+            openPhase(currentPhase); // Open the next phase
         } else {
-            document.getElementById("congrats-page").style.display = "block";
+            // Final congratulatory message
+            document.getElementById('phaseContainer').innerHTML = "<h1>Congratulations! You completed the journey.</h1>";
         }
     } else {
         alert("Please complete all tasks before proceeding.");
     }
 }
-
-// Initial Phase
-showTasks(1);
