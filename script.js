@@ -55,13 +55,8 @@ function goToHomePage() {
 
 // Move to the Next Phase
 function nextPhase() {
-  // Get the current phase number
   const currentPhase = parseInt(document.querySelector(".phaseButton.unlocked").id.replace("phase", ""));
-
-  // Unlock the next phase
-  unlockPhase(currentPhase + 1);
-
-  // After next button click, go back to home page
+  unlockPhase(currentPhase + 1); // Unlock next phase
   document.getElementById("phaseWindow").style.display = "none";
   document.getElementById("homePage").style.display = "block";
 }
