@@ -1,38 +1,55 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contemporary x International Roadmap</title>
+  <title>Game Progress</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Cover Page -->
-  <div id="coverPage">
-    <h1>Contemporary x International Roadmap</h1>
-    <p>Subtitle goes here</p>
-    <button id="startBtn">Start</button>
-  </div>
-
   <!-- Home Page -->
-  <div id="homePage" style="display: none;">
-    <h1>Welcome to the Home Page</h1>
-    <div id="phases">
-      <button id="phase1" class="phaseButton unlocked" onclick="showPhase(1)">Phase 1</button>
-      <button id="phase2" class="phaseButton locked" disabled onclick="showPhase(2)">Phase 2</button>
-      <button id="phase3" class="phaseButton locked" disabled onclick="showPhase(3)">Phase 3</button>
-      <button id="phase4" class="phaseButton locked" disabled onclick="showPhase(4)">Phase 4</button>
-      <button id="phase5" class="phaseButton locked" disabled onclick="showPhase(5)">Phase 5</button>
-    </div>
+  <div id="home" class="section active">
+    <h1>Welcome to the Game</h1>
+    <button onclick="startGame()">Start Game</button>
   </div>
 
-  <!-- Phase Task Window -->
-  <div id="phaseWindow" style="display: none;">
-    <h2 id="currentPhase"></h2>
-    <div id="phaseTasks"></div>
-    <button id="nextBtn" onclick="nextPhase()" disabled>Next</button>
-    <button onclick="goToHomePage()">Return to Home</button>
+  <!-- Phase 1 -->
+  <div id="phase1" class="section">
+    <h1>Phase 1: Introduction</h1>
+    <button onclick="nextPhase(2)">Next</button>
+  </div>
+
+  <!-- Phase 2 -->
+  <div id="phase2" class="section">
+    <h1>Phase 2: Tasks</h1>
+    <button onclick="nextPhase(3)">Next</button>
+  </div>
+
+  <!-- Phase 3 -->
+  <div id="phase3" class="section">
+    <h1>Phase 3: Challenges</h1>
+    <button onclick="nextPhase(4)">Next</button>
+  </div>
+
+  <!-- Phase 4 -->
+  <div id="phase4" class="section">
+    <h1>Phase 4: Preparation</h1>
+    <button onclick="nextPhase(5)">Next</button>
+  </div>
+
+  <!-- Phase 5 -->
+  <div id="phase5" class="section">
+    <h1>Phase 5: Final Tasks</h1>
+    <button onclick="showCongratulations()">Next</button>
+  </div>
+
+  <!-- Congratulations Page -->
+  <div id="congratulations" class="section">
+    <h1>Congratulations!</h1>
+    <p>You’ve completed the game!</p>
+    <a href="https://www.example.com/feedback" target="_blank">Click here to give feedback</a>
+    <br>
+    <button onclick="goHome()">Home</button>
   </div>
 
   <script src="script.js"></script>
