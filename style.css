@@ -1,77 +1,106 @@
-/* Default Styles */
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
-  background-color: #F0F0F0;
+  text-align: center;
+  background-color: #f9f9f9;
 }
 
 /* Cover Page Styles */
 #coverPage {
-  display: block;
-  text-align: center;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+}
+
+#coverPage h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#coverPage p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
 }
 
 #startBtn {
-  background-color: #D4AF37; /* Harrods Gold */
-  padding: 10px 20px;
-  font-size: 16px;
+  background-color: #D4AF37;
+  color: #fff;
   border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
-  color: white;
   font-weight: bold;
 }
 
 #startBtn:hover {
-  background-color: #B88600; /* Darker Gold on hover */
+  background-color: #B88600;
 }
 
 /* Home Page Styles */
 #homePage {
-  display: none;
-  margin-top: 50px;
+  padding: 2rem;
+}
+
+#phases {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .phaseButton {
-  background-color: #8D8D8D; /* Gray */
-  color: white;
-  padding: 20px;
+  width: 100px;
+  height: 100px;
   margin: 10px;
-  font-size: 16px;
-  cursor: pointer;
   border: none;
+  border-radius: 50%;
+  font-size: 1rem;
   font-weight: bold;
-}
-
-.phaseButton:hover {
-  background-color: #6F6F6F; /* Darker Gray on hover */
-}
-
-.phaseButton.unlocked {
-  background-color: #D4AF37; /* Harrods Gold */
+  color: #fff;
+  cursor: pointer;
 }
 
 .phaseButton.locked {
-  background-color: #8D8D8D; /* Gray */
+  background-color: #aaa;
   cursor: not-allowed;
 }
 
-#nextBtn, #returnBtn {
+.phaseButton.unlocked {
+  background-color: #D4AF37;
+}
+
+.phaseButton.unlocked:hover {
+  background-color: #B88600;
+}
+
+/* Phase Task Window Styles */
+#phaseWindow {
+  padding: 2rem;
+}
+
+#phaseTasks label {
+  display: block;
+  margin: 10px 0;
+}
+
+button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #D4AF37; /* Harrods Gold */
-  color: white;
-  font-size: 16px;
+  background-color: #D4AF37;
+  color: #fff;
   border: none;
   cursor: pointer;
 }
 
-#nextBtn:disabled, #returnBtn:disabled {
-  background-color: #BDBDBD; /* Disabled button style */
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
-button:disabled {
-  cursor: not-allowed;
+button:hover:not(:disabled) {
+  background-color: #B88600;
 }
